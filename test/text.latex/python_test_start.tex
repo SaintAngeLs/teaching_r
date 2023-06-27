@@ -1,0 +1,1574 @@
+
+\documentclass[12pt]{article}
+ 
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb,scrextend}
+\usepackage[style=numeric]{biblatex}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+
+\newcommand{\cont}{\subseteq}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax% just so we can load this and rsfs
+\usepackage[scr]{rsfso}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{makeidx} % Add this package for indexing
+\usepackage{imakeidx}
+\makeindex % Enable indexing
+
+
+\usepackage[colorlinks=false, pdfstartview=FitV, linkcolor=blue,
+citecolor=blue, urlcolor=blue]{hyperref}
+\usepackage{listings}
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    commentstyle=\color{green!70!black},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\small,
+    captionpos=b
+}
+
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\newcommand{\ddx}{\frac{d}{dx}}
+\newcommand{\dfdx}{\frac{df}{dx}}
+\newcommand{\ddxp}[1]{\frac{d}{dx}\left( #1 \right)}
+\newcommand{\dydx}{\frac{dy}{dx}}
+\let\ds\displaystyle
+\newcommand{\intx}[1]{\int #1 \, dx}
+\newcommand{\intt}[1]{\int #1 \, dt}
+\newcommand{\defint}[3]{\int_{#1}^{#2} #3 \, dx}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\un}{\cup}
+\newcommand{\inter}{\cap}
+\newcommand{\ps}{\mathscr{P}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\definition}[1]{\textbf{Definicja } #1}
+\newtheorem*{sol}{Rozwiązanie}
+\newtheorem*{claim}{Wniosek}
+
+\newtheorem{Example}{Example}[section]
+\newtheorem{problem}{Zadanie}
+\newtheorem{Def}{Definicja}
+\newtheorem{The}{Twierdzenie}
+\newtheorem*{Proof}{Dowód}
+
+\title{
+    {Python Course Notes} \vspace{2cm} \\
+    {\large Internatinal Programming School Algorithmics} \vspace{2cm}\\
+   
+    {\includegraphics[width=25mm]{logo.jpeg} \vspace{5cm} } 
+}
+
+\author{
+    \vspace{2cm} \\
+    Associate Engineer \\
+    Andrii Voznesenskyi \vspace{1cm} \\
+    {\large Mathematics and Information Systems Faculty} \\
+    {\large Warsaw University of Technologies} \vspace{2cm} \\
+    Instructor
+}
+\date{May 12, 2023}
+
+\addbibresource{./bibreferences.bib} % Replace with the actual name of your bibliography file
+\begin{document}
+ 
+% EVERYTHING ABOVE THIS LINE IS JUST PREABLE, NO NEED TO MESS WITH IT.__________________________________________________________________________________________
+%
+
+
+%\maketitle
+\begin{titlepage}
+    \begin{center}
+    \vspace*{1cm}
+    \includegraphics[width=25mm]{logo2.png}
+    \vspace{1cm}
+    
+    \Huge
+    \textbf{Python Course \\ Test Representation}
+    
+    \vspace{2cm}
+    \Large
+    \textbf{International Programming School Algorithmics}
+    
+    \vspace{2cm}
+    \Large
+    %\begin{flushright}
+    \textbf{Course Instructor:} \\
+    %\end{flushright}
+    \begin{flushright}
+    \large
+    \textbf{Associate Engineer, Andrii Voznesenskyi} \\
+    \end{flushright}
+    \textbf{Mathematics and Information Systems Faculty}\\
+    \textbf{Warsaw University of Technologies} \\
+    \vspace*{2cm}
+    \includegraphics[width=25mm]{logo.jpeg}
+    \vspace{1cm}
+    
+    \vspace{0.5cm}
+    \underline{\hspace{6cm}}
+    
+    
+    \vfill
+    \large
+    \textbf{May 20, 2023}
+    
+    
+\end{titlepage}
+
+\thispagestyle{empty}
+\newpage
+
+
+ \vspace{2cm}
+    \Large
+    \textbf{Restrictions:}
+
+    \normalsize
+    \begin{flushleft}
+    This document is intended for use only by individuals associated with Algorithmics and the author. Unauthorized distribution or sharing of this document, in whole or in part, is strictly prohibited.
+    \end{flushleft}
+
+    \vspace{2cm}
+    \Large
+    \textbf{Copyright Information:}
+
+    \normalsize
+    \begin{flushleft}
+    This document is protected by copyright law and MIT License. Any unauthorized reproduction, distribution, or use of this document is prohibited and may result in severe civil and criminal penalties.
+    \end{flushleft}
+    
+    \vspace{2cm}
+    \Large
+    \textbf{Purpose:}
+
+    \normalsize
+    \begin{flushleft}
+    This document is intended for the exclusive use of colleagues at Algorithmics International School or students seeking to enhance their individual understanding of the course and engage in self-education. It is of utmost importance to strictly adhere to the restrictions and copyright information provided within this document.
+    \end{flushleft}
+\thispagestyle{empty}
+\end{center}
+\newpage
+\vfill
+\begin{flushright}
+\vspace*{\fill}
+\vspace{10cm}
+
+''Education is the kindling of a flame, not the filling of a vessel.''\\Socrates, Ancient Greek philosopher
+\thispagestyle{empty}
+\end{flushright}
+
+\newpage
+\lhead{Python Course}
+\chead{Algorithmics}
+\rhead{Test}
+
+
+\tableofcontents
+
+\printindex 
+
+\newpage
+
+\section{Tasks S}
+
+
+\subsection{Task S1}
+
+\subsubsection{Task 1 (10 points)}
+Write a function \texttt{construct\_course\_list()} that constructs and returns a list of MIT classes in the following format:
+
+\begin{itemize}
+\item Course 1 - Civil and Environmental Engineering
+\item Course 2 - Mechanical Engineering
+\item Course 3 - Materials Science and Engineering
+\item Course 4 - Architecture
+\item Course 5 - Chemistry
+\item Course 6 - Electrical Engineering and Computer Science
+\item Course 7 - Biology
+\item Course 8 - Physics
+\item Course 9 - Brain and Cognitive Sciences
+\item Course 10 - Chemical Engineering
+\end{itemize}
+
+\textbf{Returns:}
+\begin{itemize}
+\item \texttt{course\_list} (list): A list of strings representing the MIT course names.
+\end{itemize}
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+construct_course_list()
+\end{lstlisting}
+This will return the following list:
+\begin{verbatim}
+[
+"Course 1 - Civil and Environmental Engineering",
+"Course 2 - Mechanical Engineering",
+"Course 3 - Materials Science and Engineering",
+"Course 4 - Architecture",
+"Course 5 - Chemistry",
+"Course 6 - Electrical Engineering and Computer Science",
+"Course 7 - Biology",
+"Course 8 - Physics",
+"Course 9 - Brain and Cognitive Sciences",
+"Course 10 - Chemical Engineering"
+]
+\end{verbatim}
+
+\subsubsection{Task 2 (10 points)}
+Write a function \texttt{get\_course\_name(number)} that takes a number as input and returns the name of the MIT course corresponding to the given number.
+
+\textbf{Function Input:}
+\begin{itemize}
+\item \texttt{number} (int): The course number to retrieve the name for.
+\end{itemize}
+
+\textbf{Returns:}
+\begin{itemize}
+\item \texttt{course\_name} (str): The name of the MIT course corresponding to the given number.
+\end{itemize}
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+get_course_name(1)
+\end{lstlisting}
+This will return the following string:
+\begin{verbatim}
+"Course 1 - Civil and Environmental Engineering"
+\end{verbatim}
+
+
+\subsubsection{Task 3 (10 points)}
+Create a function that takes a day of the year (an integer from 1 to 365) as input and returns the corresponding month. You can assume a non-leap year. For simplicity, you can consider each month to have a fixed number of days as it has in the callendar (
+    January: 31 days,
+    February: 28 days(you has to consider this number in your solution) and 29 in every leap year,
+    March: 31 days,
+    April: 30 days,
+    May: 31 days,
+    June: 30 days,
+    July: 31 days,
+    August: 31 days,
+    September: 30 days,
+    October: 31 days,
+    November: 30 days,
+    December: 31 days,). The function should return the month as a string. You can choose the month names as per your preference.
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+print(get_month(75))  # Output: March
+\end{lstlisting}
+
+
+\subsubsection{Task 4 (10 points)}
+Create a function \texttt{perform\_operation(a, b, c=0, d=0, e=0, f=0, g=0, h=0, i=0, operator='+')} that takes two numbers (\texttt{a} and \texttt{b}) and up to eight additional numbers (\texttt{c} to \texttt{i}) as arguments. The function should also accept an operator (\texttt{+}, \texttt{-}, \texttt{*}, \texttt{/}) as a keyword argument. The function should perform the corresponding operation on all the provided numbers and return the result. If the operator is division (\texttt{/}) and the second number is zero, the function should return an error message.
+
+\textbf{Function Inputs:}
+\begin{itemize}
+\item \texttt{a} (numeric): The first number.
+\item \texttt{b} (numeric): The second number.
+\item \texttt{c} to \texttt{i} (numeric, optional): Up to eight additional numbers.
+\item \texttt{operator} (str, optional): The operator to perform the operation. Default is \texttt{'+'}.
+\end{itemize}
+
+\textbf{Returns:}
+\begin{itemize}
+\item \texttt{result} (numeric or str): The result of the operation. If the operator is division (\texttt{/}) and the second number is zero, return the error message: \texttt{"Error: Division by zero"}.
+\end{itemize}
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+print(perform_operation(5, 3, 2, 4, operator='+')) # Output: 14
+print(perform_operation(10, 2, 3, operator='*')) # Output: 60
+print(perform_operation(5, 0, operator='/')) # Output: "Error: Division by zero"
+\end{lstlisting}
+
+Note: The specific implementation details and variable names may vary.
+
+\subsubsection{Task 5 (10 points)}
+Consider the fraction $\frac{a}{b} = \frac{nominator}{denominator}$, where $a$ represents the numerator and $b$ represents the denominator. In this task, ask the user to input the numerator and denominator values. The program should calculate the result of the division and (if possible) the remainder of the division operation.
+
+Create a function \texttt{divide\_fraction(numerator, denominator)} that takes the numerator and denominator as input and returns the division result and remainder (if applicable).
+
+Within the function, create a variable \texttt{i} and set it equal to \texttt{numerator}, and create another variable \texttt{answer} and set it to 0.
+
+Use a while loop to iterate while \texttt{i} is greater than 0. In each iteration, subtract the \texttt{denominator} from \texttt{i} and increment \texttt{answer} by 1.
+
+If \texttt{i} becomes 0 after the loop, return a string in the format: "Result: \texttt{answer}".
+
+If \texttt{i} is not 0, return a string in the format: "Result: \texttt{answer-1} \textbackslash n Reminder: \texttt{i+denominator}".
+
+Feel free to choose your own variable names for this task.
+
+\textbf{Function Inputs:}
+\begin{itemize}
+\item \texttt{numerator} (int): The numerator of the fraction.
+\item \texttt{denominator} (int): The denominator of the fraction.
+\end{itemize}
+
+\textbf{Returns:}
+\begin{itemize}
+\item \texttt{result} (str): A string containing the division result and remainder (if applicable) in the format mentioned above.
+\end{itemize}
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+divide_fraction(7, 3)
+\end{lstlisting}
+This will return the following string:
+\begin{verbatim}
+"Result: 2
+ Reminder: 1"
+\end{verbatim}
+Maybe the usage of the \texttt{\textbackslash n} will help.
+
+Note: The specific implementation details and variable names may vary.
+
+\newpage
+\subsection{Task S2}
+\subsubsection{Task 1 (10 points)}
+Write a function \texttt{calculate\_the\_sum\_of\_n\_numbers(n)} which calculates the sum of $n$ numbers, where $n$ is a natural finite number. \\
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+calculate_the_sum_of_n_numbers(100)
+\end{lstlisting}
+This will be used to calculate the sum $1 + 2 + 3 + \dots + 100 = \frac{100*101}{2} = 50*101 = 5050$.
+
+\subsubsection{Task 2 (10 points)}
+Write a function \texttt{nums\_to\_n(n)} to print all the odd numbers from 1 to $n$, where $n$ is a natural finite number, and if the number is divisible by 5, the function should draw the user's attention to it. The function does not return anything, it prints all odd numbers from 1 to $n$. \\
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+nums_to_n(10)
+\end{lstlisting}
+This code should print:
+\begin{verbatim}
+1;
+3;
+5 is divisible by 5;
+7;
+9;
+\end{verbatim}
+Remember to include a semicolon at the end of each line!
+
+\subsubsection{Task 3 (10 points)}
+Write a function named \texttt{analyse\_the\_number(x, a\_less, b\_greater)} which will:
+\begin{itemize}
+\item Inform the user if the number is odd or even;
+\item Inform the user if the number is greater than or equal to \texttt{"b\_greater"};
+\item Inform the user if the number is less than or equal to \texttt{"a\_less"};
+\item Tell the user what is the factorial of $x$: if $x = 6$, it will print $6*5*4*3*2*1$;
+\item Print the number$(x^{b\_greater})^{a\_less}$;
+\item If the number is from the set $[-2, 2]$ (the number $x$ may be $2$, $-1$, $0$, $1$, $2$), the function will print the number as follows: if the number $x$ is $2$, the program will print: "two".
+\end{itemize}
+
+\subsubsection{Task 4 (10 points)}
+
+
+Solve the following system of linear equations:
+
+\[
+\begin{align*}
+2x + 3y &= 7 \\
+4x - 2y &= 10 \\
+\end{align*}
+\]
+
+Write a function \texttt{solve\_system(a1, b1, c1, a2, b2, c2)} that takes the coefficients of two linear equations of the form $a_1x + b_1y = c_1$ and $a_2x + b_2y = c_2$ as inputs and solves the system of equations. The function should return the solution as a tuple $(x, y)$ representing the values of $x$ and $y$ that satisfy both equations. If the system of equations has no solution or infinite solutions, return "No unique solution".
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+solve_system(2, 3, 7, 4, -2, 10) # Output: (2.0, 1.0)
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+solve_system(1, -2, 3, 2, -4, 6) # Output: "No unique solution"
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+solve_system(1, 2, 3, 2, 4, 6) # Output: "No unique solution"
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+solve_system(0, 0, 0, 0, 0, 0) # Output: "No unique solution"
+\end{lstlisting}
+
+\textbf{Note:} Show all the necessary steps and explanations to justify your solutions. You may use any appropriate methods or techniques taught in secondary school mathematics.
+
+\subsubsection{Task 5 (10 points)}
+Write a Python function \texttt{is\_palindrome(s)} that takes a string \texttt{s} as input and returns \texttt{True} if the string is a palindrome and \texttt{False} otherwise. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward, ignoring spaces, punctuation, and capitalization.
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+is_palindrome("racecar") # Output: True
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=Python]
+is_palindrome("Hello, World!") # Output: False
+\end{lstlisting}
+
+
+Write the function \texttt{is\_palindrome} to solve the task and test it with different strings.
+
+
+
+\newpage
+\subsection{Task S3}
+
+\subsubsection{Task 1 (10 points)}
+Write a function \texttt{calculate\_factorial(n)} that calculates and returns the factorial of a natural number $n$. This function should raise an exception if $n$ is negative or if it's not an integer. \\
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+calculate_factorial(5) # Output: 120
+\end{lstlisting}
+This will return $5*4*3*2*1 = 120$.
+
+\subsubsection{Task 2 (10 points)}
+Write a function \texttt{print\_fibonacci(n)} that prints the first $n$ numbers in the Fibonacci sequence. The function should print each number on a new line. The function does not return anything, it only prints the Fibonacci numbers. \\
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+print_fibonacci(7)
+\end{lstlisting}
+This code should print:
+\begin{verbatim}
+0
+1
+1
+2
+3
+5
+8
+\end{verbatim}
+
+\subsubsection{Task 3 (10 points)}
+Write a function \texttt{is\_prime(n)} that returns \texttt{True} if a number is prime and \texttt{False} otherwise. A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. \\
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+is_prime(7)
+\end{lstlisting}
+This will return \texttt{True} because 7 is a prime number.
+
+\subsubsection{Task 4 (10 points)}
+Write a function \texttt{find\_palindromes(words)} that takes a list of words and returns a new list containing only the palindromes from the original list. A palindrome is a word that reads the same forwards and backwards. The function should ignore case sensitivity, meaning "Mom" and "mOm" should be considered palindromes.
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+words = ["level", "deed", "hello", "Madam", "world"]
+find_palindromes(words)
+\end{lstlisting}
+This will return \texttt{["level", "deed", "Madam"]}, as these words are palindromes.
+
+\subsubsection{Task 5 (10 points)}
+Write a function \texttt{calculate\_mean(numbers)} that takes a list of numbers and returns the mean (average) value. The function should return the mean as a floating-point number.
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+numbers = [1, 2, 3, 4, 5]
+calculate_mean(numbers) # Output: 3.0
+\end{lstlisting}
+This will return the mean of the numbers in the list, which is 3.0.
+
+
+\newpage
+
+\subsection{Task S4}
+
+\subsubsection{Task 1 (10 points)}
+Write a function \texttt{calculate\_poly\_function\_val(a, b, c, d, e, k, g)} that calculates the value of a function $f(a, b, c, d, e, k, g) = 10a^3 + 11b^{10} + 12c^3 + 3d^2 + 6e^{18} + 67k^{12} + 22g^4 + \frac{127}{168}a^4 + 4e + \frac{6}{7}g^2 + \sqrt[3]{\frac{3}{2}a^2} - \frac{2}{5}d + 10e^2 - \pi k + \frac{(c + d + k + g)a^2}{b}$ at the given point $(a, b, c, d, e, k, g)$.
+
+\textbf{Function Inputs:}
+\begin{itemize}
+\item \texttt{a} (float): The value of the variable $a$.
+\item \texttt{b} (float): The value of the variable $b$.
+\item \texttt{c} (float): The value of the variable $c$.
+\item \texttt{d} (float): The value of the variable $d$.
+\item \texttt{e} (float): The value of the variable $e$.
+\item \texttt{f} (float): The value of the variable $k$.
+\item \texttt{g} (float): The value of the variable $g$.
+\end{itemize}
+
+\textbf{Returns:}
+\begin{itemize}
+\item \texttt{result} (float): The calculated value of the function $f(a, b, c, d, e, k, g)$ at the given point.
+\end{itemize}
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+calculate_poly_function_val(1.5, 2.3, -0.7, 4.2, 0.8, -1.1, 3.6)
+\end{lstlisting}
+This will return the calculated value of the function at the given point.
+
+Note: Make sure to handle any necessary mathematical operations correctly according to the specified function.
+
+\subsubsection{Task 2 (10 points)}
+Write a function \texttt{calculate\_factorial(n)} that calculates and returns the factorial of a number $n$. The function should raise an exception if $n$ is negative or not an integer. \\
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+calculate_factorial(5)
+\end{lstlisting}
+This function will return $5*4*3*2*1 = 120$.
+
+\subsubsection{Task 3 (10 points)}
+Write a function \texttt{calculate\_combination(n, r)} that calculates and returns the combination of $n$ items taken $r$ at a time, where $n$ and $r$ are natural numbers and $r \leq n$. More presize information about the Newtonian binomial symbol defined to tel how many ways exists to choose r different items from n is below \\
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+calculate_combination(5, 2)
+\end{lstlisting}
+This function will return $10$, as there are 10 ways to choose 2 items from 5.
+
+The combination, denoted as $\binom{n}{r}$, represents the number of ways to choose $r$ items from a set of $n$ distinct items, without regard to their order. It can be calculated using the formula:
+
+\[
+\binom{n}{r} = \frac{n!}{r!(n-r)!}
+\]
+
+\subsubsection{Task 4 (10 points)}
+
+Write a function \texttt{analyze\_apple\_weights(apple\_weights)} that takes a list of apple weights as input and performs the following analysis:
+
+    Calculate the average weight of the apples.
+    Determine the maximum weight among the apples.
+    Determine the minimum weight among the apples.
+
+The function should return a dictionary containing the analysis results.
+
+\textbf{Function Input:}
+\begin{itemize}
+\item \texttt{apple\_weights} (list): A list of floating-point numbers representing the weights of the apples.
+\end{itemize}
+
+\textbf{Returns:}
+\begin{itemize}
+\item \texttt{analysis\_results} (dictionary): A dictionary containing the following analysis results:
+- \texttt{"average\_weight"}: The average weight of the apples.
+- \texttt{"max\_weight"}: The maximum weight among the apples.
+- \texttt{"min\_weight"}: The minimum weight among the apples.
+\end{itemize}
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+apple_weights = [0.2, 0.5, 0.3, 0.6, 0.4]
+analyze_apple_weights(apple_weights)
+\end{lstlisting}
+This will return the following dictionary:
+\begin{verbatim}
+{
+"average_weight": 0.4,
+"max_weight": 0.6,
+"min_weight": 0.2
+}
+\end{verbatim}
+
+Note: This simplified task focuses on calculating the average, maximum, and minimum weights of the apples in the dataset. It omits the additional analysis requirements mentioned in the original task.
+
+\subsubsection{Task 5 (10 points)}
+Consider the list of MIT classes in the following format:
+
+\begin{itemize}
+\item Course 1 - Civil and Environmental Engineering
+\item Course 2 - Mechanical Engineering
+\item Course 3 - Materials Science and Engineering
+\item Course 4 - Architecture
+\item Course 5 - Chemistry
+\item Course 6 - Electrical Engineering and Computer Science
+\item Course 7 - Biology
+\item Course 8 - Physics
+\item Course 9 - Brain and Cognitive Sciences
+\item Course 10 - Chemical Engineering
+\end{itemize}
+
+Write a function \texttt{get\_course\_name(number)} that takes a number as input and returns the name of the MIT course corresponding to the given number.
+
+\textbf{Function Input:}
+\begin{itemize}
+\item \texttt{number} (int): The course number to retrieve the name for.
+\end{itemize}
+
+\textbf{Returns:}
+\begin{itemize}
+\item \texttt{course\_name} (str): The name of the MIT course corresponding to the given number.
+\end{itemize}
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+get_course_name(1)
+\end{lstlisting}
+This will return the following string:
+\begin{verbatim}
+"Course 1 - Civil and Environmental Engineering"
+\end{verbatim}
+\newpage
+\subsection{Task S5}
+
+\subsubsection{Task 1 (10 points)}
+Create a function \texttt{perform\_operation(a, b, c=0, d=0, e=0, f=0, g=0, h=0, i=0, operator='+')} that takes two numbers (\texttt{a} and \texttt{b}) and up to eight additional numbers (\texttt{c} to \texttt{i}) as arguments. The function should also accept an operator (\texttt{+}, \texttt{-}, \texttt{*}, \texttt{/}) as a keyword argument. The function should perform the corresponding operation on all the provided numbers and return the result. If the operator is division (\texttt{/}) and the second number is zero, the function should return an error message.
+
+\textbf{Function Inputs:}
+\begin{itemize}
+\item \texttt{a} (numeric): The first number.
+\item \texttt{b} (numeric): The second number.
+\item \texttt{c} to \texttt{i} (numeric, optional): Up to eight additional numbers.
+\item \texttt{operator} (str, optional): The operator to perform the operation. Default is \texttt{'+'}.
+\end{itemize}
+
+\textbf{Returns:}
+\begin{itemize}
+\item \texttt{result} (numeric or str): The result of the operation. If the operator is division (\texttt{/}) and the second number is zero, return the error message: \texttt{"Error: Division by zero"}.
+\end{itemize}
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+print(perform_operation(5, 3, 2, 4, operator='+')) # Output: 14
+print(perform_operation(10, 2, 3, operator='*')) # Output: 60
+print(perform_operation(5, 0, operator='/')) # Output: "Error: Division by zero"
+\end{lstlisting}
+
+Note: The specific implementation details and variable names may vary.
+
+\subsubsection{Task 2 (10 points)}
+Write a Python function \texttt{fibonacci(n)} that calculates the $n$th Fibonacci number using recursion. \\
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+print(fibonacci(10))
+\end{lstlisting}
+This should print the 10th Fibonacci number.
+
+\subsubsection{Task 3 (10 points)}
+
+Let's calculate the value of the iterated integral of a differentiable and continuous function $f(x,y,x) = 1$ :
+\[
+\int_a^b \int_c^d \int_e^g 1 \, dx \, dy \, dz = (b - a)(d - c)(g - e)
+\]
+
+Write a function \texttt{calculate\_iterated\_integral(a, b, c, d, e, g)} that calculates the value of the iterated integral of a differentiable and continuous function $f(x,y,z)=1$. The function should take the limits of integration aaa, bbb, ccc, ddd, eee, and ggg as inputs and return the calculated value of the iterated integral.
+
+\textbf{Function Inputs:}
+\begin{itemize}
+\item \texttt{a} (numeric): The lower limit of integration for the variable xxx.
+\item \texttt{b} (numeric): The upper limit of integration for the variable xxx.
+\item \texttt{c} (numeric): The lower limit of integration for the variable yyy.
+\item \texttt{d} (numeric): The upper limit of integration for the variable yyy.
+\item \texttt{e} (numeric): The lower limit of integration for the variable zzz.
+\item \texttt{g} (numeric): The upper limit of integration for the variable zzz.
+\end{itemize}
+
+\textbf{Returns:}
+\begin{itemize}
+\item \texttt{result} (numeric): The calculated value of the iterated integral, which is equal to $(b - a)(d - c)(g - e)$.
+\end{itemize}
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+result = calculate_iterated_integral(1, 3, 2, 4, 0, 5)
+print(result) # Output: 36
+\end{lstlisting}
+
+Note: The specific implementation details, function name, and variable names may vary.
+
+
+\subsubsection{Task 4 (10 points)}
+Write a Python function \texttt{is\_palindrome(s)} that takes a string \texttt{s} as input and returns \texttt{True} if the string is a palindrome and \texttt{False} otherwise. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward, ignoring spaces, punctuation, and capitalization.
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+is_palindrome("racecar") # Output: True
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=Python]
+is_palindrome("Hello, World!") # Output: False
+\end{lstlisting}
+
+
+Write the function \texttt{is\_palindrome} to solve the task and test it with different strings.
+
+
+
+\subsubsection{Task 5 (10 points)}
+Create a function that takes a day of the year (an integer from 1 to 365) as input and returns the corresponding month. You can assume a non-leap year. For simplicity, you can consider each month to have a fixed number of days. The function should return the month as a string. You can choose the month names as per your preference.
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+print(get_month(75))  # Output: March
+\end{lstlisting}
+
+
+\section{Tasks P}
+\subsection{Project 1: Turtle drawing }
+\subsubsection{Description}
+
+The task of this program is to create an interactive drawing application using the turtle module in Python. The program allows the user to control a turtle object on the screen and perform various actions. 
+
+\subsubsection{Specification}
+Here is a breakdown of the tasks performed by the program:
+
+\begin{enumerate}[label=\arabic*.]
+  \item Set up the Turtle:
+    \begin{itemize}
+      \item Create a turtle object.
+      \item Set the turtle's speed to 100.
+      \item Set the turtle's initial color to red.
+      \item Set the turtle's width to 1.
+      \item Set the turtle's shape to "turtle".
+      \item Put the turtle's pen down to start drawing.
+    \end{itemize}
+  
+  \item Define Color Changing Functions:
+    \begin{itemize}
+      \item Implement \texttt{turtle\_color\_red()} to change the turtle's color to red.
+      \item Implement \texttt{turtle\_color\_green()} to change the turtle's color to green.
+    \end{itemize}
+  
+  \item Define Mouse Event Function:
+    \begin{itemize}
+      \item Implement \texttt{fxn(x, y)} to handle mouse drag events.
+      \item Stop backtracking of the turtle.
+      \item Adjust the turtle's angle and direction towards the new coordinates (x, y).
+      \item Move the turtle to the new coordinates (x, y).
+      \item Enable the function to be called again for further dragging.
+    \end{itemize}
+  
+  \item Define Keyboard Event Functions:
+    \begin{itemize}
+      \item Implement \texttt{move\_forward()} to move the turtle forward by 50 units.
+      \item Implement \texttt{move\_backward()} to move the turtle backward by 50 units.
+      \item Implement \texttt{turn\_left()} to rotate the turtle left by 45 degrees.
+      \item Implement \texttt{turn\_right()} to rotate the turtle right by 45 degrees.
+      \item Implement \texttt{fill\_screen()} to fill the entire screen with color.
+    \end{itemize}
+  
+  \item Set up Event Listeners:
+    \begin{itemize}
+      \item Get the turtle's screen object.
+      \item Enable listening for key and mouse events.
+      \item Register event handlers for specific keys and mouse clicks.
+      \item When events occur, the corresponding functions are called to perform the desired actions.
+    \end{itemize}
+  
+  \item Enter the Main Event Loop:
+    \begin{itemize}
+      \item Start the turtle's event loop.
+      \item The program continuously listens for events and responds accordingly.
+      \item The program remains interactive until the window is closed.
+    \end{itemize}
+\end{enumerate}
+
+The main goal of this program is to provide an interactive drawing experience where the user can control the turtle's movement, change its color, and fill the screen with color. The program utilizes various event-driven functions to respond to user inputs and update the turtle's behavior on the screen.
+\newpage
+\subsection{Project 2: Number Guessing Game}
+
+\subsubsection{Description}
+In this project, you will create a number guessing game. The program will generate a random number between a specified range, and the user will have to guess the number within a certain number of attempts. After each guess, the program will provide feedback to the user if the guess is too high or too low. The game will continue until the user guesses the correct number or runs out of attempts.
+
+\subsubsection{Specifications}
+\begin{itemize}
+\item The program should generate a random number between a specified range.
+\item The user should be prompted to enter their guess.
+\item The program should provide feedback to the user if the guess is too high or too low.
+\item The program should keep track of the number of attempts.
+\item The game should continue until the user guesses the correct number or runs out of attempts.
+\item The program should display a message indicating whether the user won or lost the game.
+\end{itemize}
+
+\newpage
+\subsection{Project 3: To-Do List}
+
+\subsubsection{Description}
+In this project, you will create a simple to-do list application. The program will allow the user to add tasks, mark tasks as completed, and view the list of tasks. The tasks will be stored in memory while the program is running, and they will be lost once the program is closed.
+
+\subsubsection{Specifications}
+\begin{itemize}
+\item The program should provide a menu with options to add a task, mark a task as completed, and view the list of tasks.
+\item The user should be able to enter the details of a task (e.g., task name, due date) when adding a task.
+\item The program should store the tasks in a list or data structure.
+\item The program should display the list of tasks with their details.
+\item The user should be able to mark a task as completed, which will update its status in the list.
+\item The program should handle invalid inputs and provide appropriate error messages.
+\end{itemize}
+
+\newpage
+
+\subsection{Project 4: Simple Calculator}
+
+\subsubsection{Description}
+In this project, you will create a simple calculator program. The program will prompt the user to enter two numbers and an operation (+, -, *, /), and it will perform the corresponding calculation and display the result.
+
+\subsubsection{Specifications}
+\begin{itemize}
+\item The program should prompt the user to enter the first number.
+\item The program should prompt the user to enter the second number.
+\item The program should prompt the user to enter the operation (+, -, *, /).
+\item The program should perform the corresponding calculation based on the entered numbers and operation.
+\item The program should display the result of the calculation.
+\item The program should handle invalid inputs and provide appropriate error messages.
+\end{itemize}
+
+\newpage
+
+
+\subsection{Project 5: Hangman Game}
+
+\subsubsection{Description}
+In this project, you will create a Hangman game. The program will select a random word from a predefined list, and the user will have to guess the letters of the word one by one. The user will have a limited number of attempts, and the program will provide feedback on the correctness of each guess.
+
+\subsubsection{Specifications}
+\begin{itemize}
+\item The program should select a random word from a predefined list of words.
+\item The program should display the initial state of the word with underscores for the unknown letters.
+\item The program should prompt the user to enter a letter guess.
+\item The program should check the correctness of the guess and update the state of the word accordingly.
+\item The program should display the updated state of the word with the correctly guessed letters.
+\item The program should keep track of the number of attempts and limit the guesses to a certain number.
+\item The program should display a message indicating whether the user won or lost the game.
+\end{itemize}
+\newpage
+
+\section{Завдання S}
+
+\subsection{Завдання S1}
+
+\subsubsection{Завдання 1 (10 балів)}
+Напишіть функцію \texttt{construct\_course\_list()}, яка створює і повертає список предметів MIT у наступному форматі:
+
+\begin{itemize}
+\item Course 1 - Civil and Environmental Engineering
+\item Course 2 - Mechanical Engineering
+\item Course 3 - Materials Science and Engineering
+\item Course 4 - Architecture
+\item Course 5 - Chemistry
+\item Course 6 - Electrical Engineering and Computer Science
+\item Course 7 - Biology
+\item Course 8 - Physics
+\item Course 9 - Brain and Cognitive Sciences
+\item Course 10 - Chemical Engineering
+\end{itemize}
+\textbf{Повертає:}
+\begin{itemize}
+\item \texttt{course\_list} (список): Список рядків, які представляють назви курсів MIT.
+\end{itemize}
+
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+construct_course_list()
+\end{lstlisting}
+Це поверне наступний список:
+\begin{verbatim}
+[
+"Course 1 - Civil and Environmental Engineering",
+"Course 2 - Mechanical Engineering",
+"Course 3 - Materials Science and Engineering",
+"Course 4 - Architecture",
+"Course 5 - Chemistry",
+"Course 6 - Electrical Engineering and Computer Science",
+"Course 7 - Biology",
+"Course 8 - Physics",
+"Course 9 - Brain and Cognitive Sciences",
+"Course 10 - Chemical Engineering"
+]
+\end{verbatim}
+\selectlanguage{ukrainian}
+
+\subsubsection{Завдання 2 (10 балів)}
+Напишіть функцію \texttt{get\_course\_name(number)}, яка приймає число як вхідні дані і повертає назву предмету MIT, що відповідає заданому номеру.
+
+\textbf{Вхідні дані:}
+\begin{itemize}
+\item \texttt{number} (ціле число): Номер курсу, для якого потрібно отримати назву.
+\end{itemize}
+
+\textbf{Повертає:}
+\begin{itemize}
+\item \texttt{course\_name} (рядок): Назва предмету MIT, що відповідає заданому номеру.
+\end{itemize}
+
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+get_course_name(1)
+\end{lstlisting}
+Це поверне наступний рядок:
+\begin{verbatim}
+"Course 1 - Civil and Environmental Engineering"
+\end{verbatim}
+
+\subsubsection{Завдання 3 (10 балів)}
+Створіть функцію, яка приймає день року (ціле число від 1 до 365) як вхідні дані і повертає відповідний місяць. Ви можете припустити, що рік не є високосним. З метою спрощення, ви можете вважати, що кожен місяць має фіксовану кількість днів, як це вказано у календарі (
+Січень: 31 день,
+Лютий: 28 днів (ви повинні врахувати це число у своєму рішенні),
+Березень: 31 день,
+Квітень: 30 днів,
+Травень: 31 день,
+Червень: 30 днів,
+Липень: 31 день,
+Серпень: 31 день,
+Вересень: 30 днів,
+Жовтень: 31 день,
+Листопад: 30 днів,
+Грудень: 31 день). Функція повинна повертати місяць у вигляді рядка. Ви можете вибрати назви місяців за своїм бажанням.
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+print(get_month(75)) # Вивід: March
+\end{lstlisting}
+
+\subsubsection{Завдання 4 (10 балів)}
+Створіть функцію \texttt{perform\_operation(a, b, c=0, d=0, e=0, f=0, g=0, h=0, i=0, operator='+')}, яка приймає два числа (\texttt{a} і \texttt{b}) та до восьми додаткових чисел (\texttt{c} до \texttt{i}) як аргументи. Функція також повинна приймати оператор (\texttt{+}, \texttt{-}, \texttt{*}, \texttt{/}) в якості іменованого аргументу. Функція повинна виконувати відповідну операцію над усіма заданими числами і повертати результат. Якщо оператор - це ділення (\texttt{/}), а друге число - нуль, функція повинна повертати повідомлення про помилку.
+
+\textbf{Вхідні дані функції:}
+\begin{itemize}
+\item \texttt{a} (числовий): Перше число.
+\item \texttt{b} (числовий): Друге число.
+\item \texttt{c} до \texttt{i} (числовий, необов'язковий): До восьми додаткових чисел.
+\item \texttt{operator} (рядок, необов'язковий): Оператор для виконання операції. За замовчуванням - \texttt{'+'}.
+\end{itemize}
+
+\textbf{Повертає:}
+\begin{itemize}
+\item \texttt{result} (числовий або рядок): Результат операції. Якщо оператор - це ділення (\texttt{/}), а друге число - нуль, повертається повідомлення про помилку: \texttt{"Error: Division by zero"}.
+\end{itemize}
+
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+print(perform_operation(5, 3, 2, 4, operator='+')) # Вивід: 14
+print(perform_operation(10, 2, 3, operator='*')) # Вивід: 60
+print(perform_operation(5, 0, operator='/')) # Вивід: "Error: Division by zero"
+\end{lstlisting}
+
+Примітка: Конкретні деталі реалізації та назви змінних можуть варіюватися.
+
+\subsubsection{Завдання 5 (10 балів)}
+Розглянемо дріб $\frac{a}{b} = \frac{чисельник}{знаменник}$, де $a$ позначає чисельник, а $b$ позначає знаменник. У цьому завданні попросіть користувача ввести значення чисельника та знаменника. Програма повинна обчислити результат ділення та (за можливості) залишок від операції ділення.
+
+Створіть функцію \texttt{divide\_fraction(numerator, denominator)}, яка приймає чисельник та знаменник як вхідні дані і повертає результат ділення та залишок (якщо є).
+
+Усередині функції створіть змінну \texttt{i} і прирівняйте її до \texttt{numerator}, а також створіть іншу змінну \texttt{answer} і прирівняйте її до 0.
+
+Використовуйте цикл \texttt{while}, щоб ітерувати, доки \texttt{i} більше 0. На кожній ітерації віднімайте від \texttt{i} значення \texttt{denominator} і збільшуйте \texttt{answer} на 1.
+
+Якщо \texttt{i} стає рівним 0 після циклу, поверніть рядок у форматі: "Результат: \texttt{answer}".
+
+Якщо \texttt{i} не дорівнює 0, поверніть рядок у форматі: "Результат: \texttt{answer-1} \textbackslash n Залишок: \texttt{i+denominator}".
+
+Не соромтеся обрати власні назви змінних для цього завдання.
+
+\textbf{Вхідні дані функції:}
+\begin{itemize}
+\item \texttt{numerator} (ціле число): Чисельник дробу.
+\item \texttt{denominator} (ціле число): Знаменник дробу.
+\end{itemize}
+
+\textbf{Повернення:}
+\begin{itemize}
+\item \texttt{result} (рядок): Рядок, що містить результат ділення та залишок (якщо є) у форматі, зазначеному вище.
+\end{itemize}
+
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+divide_fraction(7, 3)
+\end{lstlisting}
+Це поверне наступний рядок:
+\begin{verbatim}
+"Result: 2
+ Reminder: 1"
+\end{verbatim}
+Можливо, використання \texttt{\textbackslash n} буде корисним.
+
+Примітка: Конкретні деталі реалізації та назви змінних можуть варіюватися.
+\end{verbatim}
+
+\newpage
+
+\subsection{Завдання S2}
+\subsubsection{Завдання 1 (10 балів)}
+Напишіть функцію \texttt{calculate\_the\_sum\_of\_n\_numbers(n)}, яка обчислює суму $n$ чисел, де $n$ є природним скінченним числом. \
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+calculate_the_sum_of_n_numbers(100)
+\end{lstlisting}
+Це буде використовуватись для обчислення суми $1 + 2 + 3 + \dots + 100 = \frac{100101}{2} = 50101 = 5050$.
+
+\subsubsection{Завдання 2 (10 балів)}
+Напишіть функцію \texttt{nums\_to\_n(n)}, яка виводить всі непарні числа від 1 до $n$, де $n$ є природним скінченним числом, а якщо число ділиться на 5, функція повинна звернути увагу користувача на це. Функція нічого не повертає, вона лише виводить всі непарні числа від 1 до $n$. \
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+nums_to_n(10)
+\end{lstlisting}
+Цей код повинен вивести:
+\begin{verbatim}
+1;
+3;
+5 ділиться на 5;
+7;
+9;
+\end{verbatim}
+Не забудьте додати крапку з комою в кінці кожного рядка!
+
+\subsubsection{Завдання 3 (10 балів)}
+Напишіть функцію з назвою \texttt{analyse\_the\_number(x, a\_less, b\_greater)}, яка буде:
+\begin{itemize}
+\item Повідомляти користувачу, чи число є непарним чи парним;
+\item Повідомляти користувачу, чи число більше або дорівнює \texttt{"b\_greater"};
+\item Повідомляти користувачу, чи число менше або дорівнює \texttt{"a\_less"};
+\item Повідомляти користувачу, який факторіал має число $x$: якщо $x = 6$, воно виведе $65432*1$;
+\item Виводити число $(x^{b\_greater})^{a\_less}$;
+\item Якщо число належить множині $[-2, 2]$ (число $x$ може бути $2$, $-1$, $0$, $1$, $2$), функція буде виводити число наступним чином: якщо число $x$ дорівнює $2$, програма виведе: "two".
+\end{itemize}
+
+\subsubsection{Завдання 4 (10 балів)}
+
+Розв'яжіть наступну систему лінійних рівнянь:
+
+\[
+\begin{align*}
+2x + 3y &= 7 \\
+4x - 2y &= 10 \\
+\end{align*}
+\]
+
+Напишіть функцію \texttt{solve\_system(a1, b1, c1, a2, b2, c2)}, яка приймає коефіцієнти двох лінійних рівнянь у вигляді $a_1x + b_1y = c_1$ та $a_2x + b_2y = c_2$ як вхідні дані і розв'язує систему рівнянь. Функція повинна повертати розв'язок у вигляді кортежу $(x, y)$, який представляє значення $x$ та $y$, які задовольняють обом рівнянням. Якщо система рівнянь не має розв'язку або має нескінченно багато розв'язків, поверніть "No unique solution".
+
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+solve_system(2, 3, 7, 4, -2, 10) # Вивід: (2.0, 1.0)
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+solve_system(1, -2, 3, 2, -4, 6) # Вивід: "No unique solution"
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+solve_system(1, 2, 3, 2, 4, 6) # Вивід: "No unique solution"
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+solve_system(0, 0, 0, 0, 0, 0) # Вивід: "No unique solution"
+\end{lstlisting}
+
+\textbf{Примітка:} Покажіть всі необхідні кроки та пояснення, щоб обґрунтувати ваші розв'язки. Ви можете використовувати будь-які відповідні методи або техніки, які вивчалися у школі.
+
+\subsubsection{Завдання 5 (10 балів)}
+Напишіть функцію Python \texttt{is_palindrome(s)}, яка приймає рядок \texttt{s} як вхідні дані і повертає \texttt{True}, якщо рядок є паліндромом, і \texttt{False} у протилежному випадку. Паліндром - це слово, фраза, число або інша послідовність символів, яка читається однаково зліва направо і справа наліво, ігноруючи пропуски, розділові знаки та регістр символів.
+
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+is_palindrome("racecar") # Вивід: True
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+is_palindrome("Hello, World!") # Вивід: False
+\end{lstlisting}
+
+Напишіть функцію \texttt{is\_palindrome}, щоб вирішити завдання та протестуйте її з різними рядками.
+
+\newpage
+
+\newpage
+
+\subsection{Завдання S3}
+
+\subsubsection{Завдання 1 (10 балів)}
+Напишіть функцію \texttt{calculate\_factorial(n)}, яка обчислює і повертає факторіал натурального числа $n$. Ця функція повинна викликати виключення, якщо $n$ є від'ємним числом або не цілим числом. \
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+calculate_factorial(5) # Вивід: 120
+\end{lstlisting}
+Це поверне $5 \times 4 \times 3 \times 2 \times 1 = 120$.
+
+\subsubsection{Завдання 2 (10 балів)}
+Напишіть функцію \texttt{print\_fibonacci(n)}, яка виводить перші $n$ чисел послідовності Фібоначчі. Функція повинна вивести кожне число на новому рядку. Функція не повертає нічого, вона лише виводить числа Фібоначчі. \
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+print_fibonacci(7)
+\end{lstlisting}
+Цей код повинен вивести:
+\begin{verbatim}
+0
+1
+1
+2
+3
+5
+8
+\end{verbatim}
+
+\subsubsection{Завдання 3 (10 балів)}
+Напишіть функцію \texttt{is\_prime(n)}, яка повертає \texttt{True}, якщо число є простим, і \texttt{False} у протилежному випадку. Просте число - це натуральне число, більше 1, яке не має додатних дільників, крім 1 і самого себе. \
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+is_prime(7)
+\end{lstlisting}
+Це поверне \texttt{True}, оскільки 7 є простим числом.
+
+\subsubsection{Завдання 4 (10 балів)}
+Напишіть функцію \texttt{find\_palindromes(words)}, яка приймає список слів і повертає новий список, що містить тільки паліндроми з оригінального списку. Паліндром - це слово, яке читається однаково зліва направо і справа наліво. Функція повинна ігнорувати регістр букв, тобто "Mom" і "mOm" вважаються паліндромами.
+
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+words = ["level", "deed", "hello", "Madam", "world"]
+find_palindromes(words)
+\end{lstlisting}
+Це поверне \texttt{["level", "deed", "Madam"]}, оскільки ці слова є паліндромами.
+
+\subsubsection{Завдання 5 (10 балів)}
+Напишіть функцію \texttt{calculate\_mean(numbers)}, яка приймає список чисел і повертає середнє значення (середнє арифметичне). Функція повинна повертати середнє значення у форматі числа з плаваючою комою.
+
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+numbers = [1, 2, 3, 4, 5]
+calculate_mean(numbers) # Вивід: 3.0
+\end{lstlisting}
+Це поверне середнє значення чисел у списку, яке дорівнює 3.0.
+
+\newpage
+
+\subsection{Завдання S4}
+
+\subsubsection{Завдання 1 (10 балів)}
+Напишіть функцію \texttt{calculate\_poly\_function\_val(a, b, c, d, e, k, g)}, яка обчислює значення функції $f(a, b, c, d, e, k, g) = 10a^3 + 11b^{10} + 12c^3 + 3d^2 + 6e^{18} + 67k^{12} + 22g^4 + \frac{127}{168}a^4 + 4e + \frac{6}{7}g^2 + \sqrt[3]{\frac{3}{2}a^2} - \frac{2}{5}d + 10e^2 - \pi k + \frac{(c + d + k + g)a^2}{b}$ в заданій точці $(a, b, c, d, e, k, g)$.
+
+\textbf{Вхідні дані функції:}
+\begin{itemize}
+\item \texttt{a} (float): Значення змінної $a$.
+\item \texttt{b} (float): Значення змінної $b$.
+\item \texttt{c} (float): Значення змінної $c$.
+\item \texttt{d} (float): Значення змінної $d$.
+\item \texttt{e} (float): Значення змінної $e$.
+\item \texttt{k} (float): Значення змінної $k$.
+\item \texttt{g} (float): Значення змінної $g$.
+\end{itemize}
+
+\textbf{Повернення функції:}
+\begin{itemize}
+\item \texttt{result} (float): Обчислене значення функції $f(a, b, c, d, e, k, g)$ в заданій точці.
+\end{itemize}
+
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+calculate_poly_function_val(1.5, 2.3, -0.7, 4.2, 0.8, -1.1, 3.6)
+\end{lstlisting}
+Це поверне обчислене значення функції в заданій точці.
+
+Примітка: Переконайтеся, що ви правильно виконуєте необхідні математичні операції згідно з вказаною функцією.
+
+\subsubsection{Завдання 2 (10 балів)}
+Напишіть функцію \texttt{calculate\_factorial(n)}, яка обчислює і повертає факторіал числа $n$. Функція повинна викликати виключення, якщо $n$ є від'ємним числом або не цілим числом. \
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+calculate_factorial(5)
+\end{lstlisting}
+Ця функція поверне $5 \times 4 \times 3 \times 2 \times 1 = 120$.
+
+\subsubsection{Завдання 3 (10 балів)}
+Напишіть функцію \texttt{calculate\_combination(n, r)}, яка обчислює і повертає комбінацію $n$ елементів, вибраних $r$ разів, де $n$ і $r$ є натуральними числами і $r \leq n$. Детальніша інформація про символ Ньютона бінома для підрахунку кількості способів вибрати $r$ різних елементів з $n$ наведена нижче. \
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+calculate_combination(5, 2)
+\end{lstlisting}
+Ця функція поверне $10$, оскільки є 10 способів вибрати 2 елементи з 5.
+
+Комбінація, позначена як $\binom{n}{r}$, представляє кількість способів вибрати $r$ елементів із набору з $n$ різних елементів, без урахування їх порядку. Це можна обчислити за формулою:
+\[
+\binom{n}{r} = \frac{n!}{r!(n-r)!}
+\]
+
+\subsubsection{Завдання 4 (10 балів)}
+
+Напишіть функцію \texttt{analyze\_apple\_weights(apple\_weights)}, яка приймає список ваг яблук в якості вхідних даних і виконує такий аналіз:
+
+Обчислити середню вагу яблук.
+Визначити максимальну вагу серед яблук.
+Визначити мінімальну вагу серед яблук.
+
+Функція повинна повертати словник, що містить результати аналізу.
+
+\textbf{Вхідні дані функції:}
+\begin{itemize}
+\item \texttt{apple\_weights} (list): Список чисел з плаваючою комою, що представляє ваги яблук.
+\end{itemize}
+
+\textbf{Повернення функції:}
+\begin{itemize}
+\item \texttt{analysis\_results} (dictionary): Словник, що містить наступні результати аналізу:
+
+    \texttt{"average\_weight"}: Середня вага яблук.
+    \texttt{"max\_weight"}: Максимальна вага серед яблук.
+    \texttt{"min\_weight"}: Мінімальна вага серед яблук.
+    \end{itemize}
+
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+apple_weights = [0.2, 0.5, 0.3, 0.6, 0.4]
+analyze_apple_weights(apple_weights)
+\end{lstlisting}
+Це поверне наступний словник:
+\begin{verbatim}
+{
+"average_weight": 0.4,
+"max_weight": 0.6,
+"min_weight": 0.2
+}
+\end{verbatim}
+
+Примітка: Це спрощене завдання зосереджується на обчисленні середньої, максимальної та мінімальної ваг яблук у наборі даних. Воно не включає додаткові вимоги до аналізу, згадані в початковому завданні.
+
+\subsubsection{Завдання 5 (10 балів)}
+Розгляньте список курсів MIT у наступному форматі:
+
+\begin{itemize}
+\item Course 1 - Civil and Environmental Engineering
+\item Course 2 - Mechanical Engineering
+\item Course 3 - Materials Science and Engineering
+\item Course 4 - Architecture
+\item Course 5 - Chemistry
+\item Course 6 - Electrical Engineering and Computer Science
+\item Course 7 - Biology
+\item Course 8 - Physics
+\item Course 9 - Brain and Cognitive Sciences
+\item Course 10 - Chemical Engineering
+\end{itemize}
+
+Напишіть функцію \texttt{get\_course\_name(number)}, яка приймає число в якості вхідних даних і повертає назву курсу MIT, що відповідає заданому числу.
+
+\textbf{Вхідні дані функції:}
+\begin{itemize}
+\item \texttt{number} (int): Номер курсу, для якого потрібно отримати назву.
+\end{itemize}
+
+\textbf{Повернення функції:}
+\begin{itemize}
+\item \texttt{course\_name} (str): Назва курсу MIT, що відповідає заданому числу.
+\end{itemize}
+
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+get_course_name(1)
+\end{lstlisting}
+Це поверне наступний рядок:
+\begin{verbatim}
+"Course 1 - Civil and Environmental Engineering"
+\end{verbatim}
+
+
+\newpage
+\subsection{Завдання S5}
+
+\subsubsection{Завдання 1 (10 балів)}
+Створіть функцію \texttt{perform\_operation(a, b, c=0, d=0, e=0, f=0, g=0, h=0, i=0, operator='+')}, яка приймає два числа (\texttt{a} і \texttt{b}) і до восьми додаткових чисел (\texttt{c} до \texttt{i}) як аргументи. Функція повинна також приймати оператор (\texttt{+}, \texttt{-}, \texttt{*}, \texttt{/}) як ключовий аргумент. Функція повинна виконувати відповідну операцію над усіма наданими числами і повертати результат. Якщо оператор є діленням (\texttt{/}), а друге число дорівнює нулю, функція повинна повернути повідомлення про помилку.
+
+\textbf{Вхідні дані функції:}
+\begin{itemize}
+\item \texttt{a} (числовий тип даних): Перше число.
+\item \texttt{b} (числовий тип даних): Друге число.
+\item \texttt{c} до \texttt{i} (числовий тип даних, необов'язкові): До восьми додаткових чисел.
+\item \texttt{operator} (рядок, необов'язковий): Оператор, що визначає операцію. За замовчуванням - \texttt{'+'}.
+\end{itemize}
+
+\textbf{Повернення функції:}
+\begin{itemize}
+\item \texttt{result} (числовий тип даних або рядок): Результат операції. Якщо оператор є діленням (\texttt{/}) і друге число дорівнює нулю, поверніть повідомлення про помилку: \texttt{"Error: Division by zero"}.
+\end{itemize}
+
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+print(perform_operation(5, 3, 2, 4, operator='+')) # Виведе: 14
+print(perform_operation(10, 2, 3, operator='*')) # Виведе: 60
+print(perform_operation(5, 0, operator='/')) # Output: "Error: Division by zero"
+\end{lstlisting}
+
+Примітка: Конкретні деталі реалізації та назви змінних можуть відрізнятися.
+
+\subsubsection{Завдання 2 (10 балів)}
+Напишіть функцію \texttt{fibonacci(n)}, яка обчислює $n$-те число Фібоначчі за допомогою рекурсії. \
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+print(fibonacci(10))
+\end{lstlisting}
+Це повинно вивести 10-те число Фібоначчі.
+
+\subsubsection{Завдання 3 (10 балів)}
+
+Обчислимо значення ітерованого інтегралу диференційовної та неперервної функції $f(x,y,z) = 1$ :
+\[
+\int_a^b \int_c^d \int_e^g 1 \, dx \, dy \, dz = (b - a)(d - c)(g - e)
+\]
+
+
+Напишіть функцію \texttt{calculate\_iterated\_integral(a, b, c, d, e, g)}, яка обчислює значення ітерованого інтегралу диференційовної та неперервної функції $f(x,y,z) = 1$. Функція повинна приймати межі інтегрування $a$, $b$, $c$, $d$, $e$ і $g$ як вхідні дані і повертати обчислене значення ітерованого інтегралу.
+
+\textbf{Вхідні дані функції:}
+\begin{itemize}
+\item \texttt{a} (числовий тип даних): Нижня межа інтегрування змінної $x$.
+\item \texttt{b} (числовий тип даних): Верхня межа інтегрування змінної $x$.
+\item \texttt{c} (числовий тип даних): Нижня межа інтегрування змінної $y$.
+\item \texttt{d} (числовий тип даних): Верхня межа інтегрування змінної $y$.
+\item \texttt{e} (числовий тип даних): Нижня межа інтегрування змінної $z$.
+\item \texttt{g} (числовий тип даних): Верхня межа інтегрування змінної $z$.
+\end{itemize}
+
+\textbf{Повернення функції:}
+\begin{itemize}
+\item \texttt{result} (числовий тип даних): Обчислене значення ітерованого інтегралу, яке дорівнює $(b - a)(d - c)(g - e)$.
+\end{itemize}
+
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+result = calculate_iterated_integral(1, 3, 2, 4, 0, 5)
+print(result) # Виведе: 36
+\end{lstlisting}
+
+Примітка: Конкретні деталі реалізації, назва функції та змінних можуть відрізнятися.
+
+\subsubsection{Завдання 4 (10 балів)}
+Напишіть функцію \texttt{is\_palindrome(s)}, яка приймає рядок \texttt{s} як вхідні дані і повертає \texttt{True}, якщо рядок є паліндромом, і \texttt{False} - в іншому випадку. Паліндром - це слово, фраза, число або інша послідовність символів, яка читається однаково в обох напрямках, ігноруючи пропуски, пунктуацію та регістр символів.
+
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+is_palindrome("racecar") # Виведе: True
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+is_palindrome("Hello, World!") # Виведе: False
+\end{lstlisting}
+
+Напишіть функцію \texttt{is\_palindrome} для вирішення завдання та перевірте її роботу з різними рядками.
+
+\subsubsection{Завдання 5 (10 балів)}
+Створіть функцію, яка приймає номер дня року (ціле число від 1 до 365) як вхідні дані і повертає відповідний місяць. Ви можете вважати, що це не високосний рік. З метою спрощення, ви можете вважати, що кожен місяць має фіксовану кількість днів. Функція повинна повертати назву місяця у вигляді рядка.
+\textbf{Приклад:}
+\begin{lstlisting}[language=Python]
+print(get_month(75)) # Виведе: March
+\end{lstlisting}
+
+\newpage
+\section{Завдання P}
+\subsection{Проект 1: Малювання за допомогою Turtle}
+\subsubsection{Опис}
+
+Метою цієї програми є створення інтерактивного додатку для малювання за допомогою модуля turtle у Python. Програма дозволяє користувачу керувати об'єктом черепахи на екрані та виконувати різні дії.
+
+\subsubsection{Специфікація}
+Ось розбиття задач, які виконує програма:
+
+\begin{enumerate}[label=\arabic*.]
+\item Налаштування черепахи:
+\begin{itemize}
+\item Створити об'єкт черепахи.
+\item Встановити швидкість черепахи на 100.
+\item Встановити початковий колір черепахи на червоний.
+\item Встановити ширину черепахи на 1.
+\item Встановити форму черепахи на "turtle".
+\item Опустити перо черепахи для початку малювання.
+\end{itemize}
+
+\item Визначення функцій зміни кольору:
+\begin{itemize}
+\item Реалізувати \texttt{turtle_color_red()}, щоб змінити колір черепахи на червоний.
+\item Реалізувати \texttt{turtle_color_green()}, щоб змінити колір черепахи на зелений.
+\end{itemize}
+
+\item Визначення функції події миші:
+\begin{itemize}
+\item Реалізувати \texttt{fxn(x, y)}, щоб обробити події перетягування миші.
+\item Зупинити відстеження шляху черепахи.
+\item Змінити кут та напрям черепахи до нових координат (x, y).
+\item Перемістити черепаху до нових координат (x, y).
+\item Увімкнути можливість виклику функції знову для подальшого перетягування.
+\end{itemize}
+
+\item Визначення функцій подій клавіатури:
+\begin{itemize}
+\item Реалізувати \texttt{move_forward()}, щоб перемістити черепаху вперед на 50 одиниць.
+\item Реалізувати \texttt{move_backward()}, щоб перемістити черепаху назад на 50 одиниць.
+\item Реалізувати \texttt{turn_left()}, щоб повернути черепаху вліво на 45 градусів.
+\item Реалізувати \texttt{turn_right()}, щоб повернути черепаху вправо на 45 градусів.
+\item Реалізувати \texttt{fill_screen()}, щоб заповнити весь екран кольором.
+\end{itemize}
+
+\item Налаштування прослуховувачів подій:
+\begin{itemize}
+\item Отримати об'єкт екрану черепахи.
+\item Увімкнути прослуховування подій клавіш та кліків миші.
+\item Зареєструвати обробники подій для конкретних клавіш та кліків миші.
+\item При виникненні подій викликаються відповідні функції для виконання необхідних дій.
+\end{itemize}
+
+\item Увійти до головного циклу подій:
+\begin{itemize}
+\item Запустити цикл подій черепахи.
+\item Програма постійно прослуховує події та реагує на них.
+\item Програма залишається інтерактивною до закриття вікна.
+\end{itemize}
+\end{enumerate}
+
+Головною метою цієї програми є надання інтерактивного досвіду малювання, де користувач може керувати рухом черепахи, змінювати її колір та заповнювати екран кольором. Програма використовує різні функції, що реагують на події, для відповіді на введення користувача та оновлення поведінки черепахи на екрані.
+\newpage
+
+\subsection{Проект 2: Гра вгадування чисел}
+
+\subsubsection{Опис}
+У цьому проекті ви створите гру вгадування чисел. Програма буде генерувати випадкове число у визначеному діапазоні, а користувачу потрібно буде вгадати число протягом певної кількості спроб. Після кожної спроби програма надасть зворотний зв'язок користувачеві, якщо вгадка занадто висока або занадто низька. Гра продовжуватиметься до тих пір, поки користувач не вгадає правильне число або не закінчиться кількість спроб.
+
+\subsubsection{Специфікація}
+\begin{itemize}
+\item Програма повинна генерувати випадкове число у визначеному діапазоні.
+\item Користувача потрібно запитати введення вгадки.
+\item Програма повинна надавати зворотний зв'язок користувачу, якщо вгадка занадто висока або занадто низька.
+\item Програма повинна відстежувати кількість спроб.
+\item Гра має продовжуватися до тих пір, поки користувач не вгадає правильне число або не закінчиться кількість спроб.
+\item Програма повинна виводити повідомлення, що інформує користувача, чи виграв він чи програв гру.
+\end{itemize}
+
+\newpage
+\subsection{Проект 3: Список справ}
+
+\subsubsection{Опис}
+У цьому проекті ви створите простий додаток для списку справ. Програма дозволить користувачу додавати завдання, відзначати завдання як виконані та переглядати список завдань. Завдання будуть зберігатися в пам'яті протягом роботи програми, але втрачатимуться після закриття програми.
+
+\subsubsection{Специфікація}
+\begin{itemize}
+\item Програма повинна надавати меню з опціями для додавання завдання, відзначення завдання як виконаного та перегляду списку завдань.
+\item Користувач повинен мати змогу ввести деталі завдання (наприклад, назву завдання, дату завершення) при додаванні завдання.
+\item Програма повинна зберігати завдання в список або структуру даних.
+\item Програма повинна відображати список завдань з їх деталями.
+\item Користувач повинен мати змогу відзначити завдання як виконане, що оновить його стан у списку.
+\item Програма повинна обробляти некоректні введення та надавати відповідні повідомлення про помилки.
+\end{itemize}
+
+\newpage
+
+\subsection{Проект 4: Простий калькулятор}
+
+\subsubsection{Опис}
+У цьому проекті ви створите просту програму-калькулятор. Програма буде просити користувача ввести два числа та операцію (+, -, *, /), а потім виконувати відповідний розрахунок та виводити результат.
+
+\subsubsection{Специфікація}
+\begin{itemize}
+\item Програма повинна просити користувача ввести перше число.
+\item Програма повинна просити користувача ввести друге число.
+\item Програма повинна просити користувача ввести операцію (+, -, *, /).
+\item Програма повинна виконати відповідний розрахунок на основі введених чисел та операції.
+\item Програма повинна вивести результат розрахунку.
+\item Програма повинна обробляти некоректні введення та надавати відповідні повідомлення про помилки.
+\end{itemize}
+
+\newpage
+
+\subsection{Проект 5: Гра Вісіллиця}
+
+\subsubsection{Опис}
+У цьому проекті ви створите гру "Вісіллиця". Програма буде вибирати випадкове слово з попередньо заданого списку, і користувачеві доведеться вгадувати літери слова по одній. У користувача буде обмежена кількість спроб, і програма буде надавати зворотний зв'язок про правильність кожної відповіді.
+
+\subsubsection{Специфікації}
+\begin{itemize}
+\item Програма повинна вибрати випадкове слово з попередньо заданого списку слів.
+\item Програма повинна відображати початковий стан слова з підкресленими літерами, які ще не вгадані.
+\item Програма повинна просити користувача ввести літеру для вгадування.
+\item Програма повинна перевіряти правильність вгадування і оновлювати стан слова відповідно.
+\item Програма повинна відображати оновлений стан слова з вірно вгаданими літерами.
+\item Програма повинна відстежувати кількість спроб і обмежувати їх до певної кількості.
+\item Програма повинна відображати повідомлення, що показує, чи переміг користувач у грі чи програв.
+\end{itemize}
+\newpage
+
+
+
+
+
+
+
+
+
+\subsection{Additional references}
+
+\subsection{A Deep Dive into the Quadratic Equation}
+
+In the discipline of algebra, a preeminent form of a polynomial equation is the second-order polynomial equation, more commonly known as the quadratic equation. A polynomial function of a single variable $x$ is typically expressed in the following general form:
+
+\begin{equation}
+f(x) = \sum_{i=0}^{n} a_ix^i = a_0 + a_1x + a_2x^2 + \cdots + a_{n-1}x^{n-1} + a_nx^n \,
+\end{equation}
+where the $f: \mathbb{R} \rightarrow \mathbb{R}$ or generally $f: \mathbb{C} \rightarrow \mathbb{C}$, $a_i, \ i \in \mathbb{N}, i \in \{0, 1, ..., n \}$ are constants and they are known as the coefficients of the polynomial. The power $n$ is a nonnegative integer and is called the degree of the polynomial. The coefficient $a_n$ of the highest power is called the leading coefficient.
+
+ The standard form of second order equation is typically expressed as $ax^2 + bx + c = 0$, where $a$, $b$, and $c$ are constants that are defined such that $a \neq 0$. The coefficients $a$, $b$, and $c$ are often referred to as the quadratic, linear, and constant terms, respectively. 
+
+The problem is: find the values of the f domain, such that f(x) = 0, f defined in $(1)$. An essential concept in the examination of these quadratic equations is the quadratic formula, which is universally used to calculate the roots of the equation. The quadratic formula is stated as:
+\begin{equation}
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\end{equation}
+An interesting feature of the quadratic formula is the term under the square root, $b^2 - 4ac$. This term is known as the discriminant. It plays a pivotal role in determining the nature of the solutions to the quadratic equation.
+
+\begin{itemize}
+    \item If the discriminant is positive, the equation possesses two distinct real roots.
+    \item If the discriminant equals zero, the equation has one real root, often referred to as a repeated or double root.
+    \item If the discriminant is negative, the equation gives rise to two complex roots.
+\end{itemize}
+
+Consider, for instance, the quadratic equation $x^2 - 5x + 6 = 0$. The coefficients of this equation are $a=1$, $b=-5$, and $c=6$. By calculating the discriminant, we find $(-5)^2 - 4*1*6 = 25 - 24 = 1$. As this is a positive value, we infer that the equation has two distinct real roots. By substituting the coefficients into the quadratic formula, we find the solutions to be:
+
+\[x = \frac{-(-5) \pm \sqrt{(-5)^2 - 4*1*6}}{2*1} = \frac{5 \pm 1}{2}\]
+
+Therefore, the roots of the equation are $x = \frac{5 + 1}{2} = 3$ and $x = \frac{5 - 1}{2} = 2$. The study of quadratic equations and their solutions is a fundamental part of algebra, and it underlies many of the more advanced topics in mathematics.
+\subsection{Solving Second Order Equations}
+
+A second order equation, also known as a quadratic equation, is an equation of the form $ax^2 + bx + c = 0$, where $a$, $b$, and $c$ are constants, and $a \neq 0$. 
+
+The solutions to a quadratic equation are given by the quadratic formula $(2)$:
+
+The term under the square root, $b^2 - 4ac$, is known as the discriminant. It determines the nature of the roots of the quadratic equation.
+
+\begin{itemize}
+    \item If the discriminant is positive, the equation has two distinct real roots.
+    \item If the discriminant is zero, the equation has exactly one real root (or a repeated real root).
+    \item If the discriminant is negative, the equation has two complex roots.
+\end{itemize}
+
+For example, let's solve the equation $x^2 - 5x + 6 = 0$. Here $a=1$, $b=-5$, and $c=6$. The discriminant is $(-5)^2 - 4*1*6 = 25 - 24 = 1$, which is positive. Thus the equation has two distinct real roots. Applying the quadratic formula gives:
+
+\[x = \frac{-(-5) \pm \sqrt{(-5)^2 - 4*1*6}}{2*1} = \frac{5 \pm 1}{2}\]
+
+So the solutions are $x = \frac{5 + 1}{2} = 3$ and $x = \frac{5 - 1}{2} = 2$.
+
+\newpage
+\subsection*{Recommended Literature}
+
+\begin{thebibliography}{9}
+
+\bibitem{pythoncrashcourse} Matthes, E. (2019). \textit{Python Crash Course: A Hands-On, Project-Based Introduction to Programming}. No Starch Press.
+
+\bibitem{automatetheboringstuff} Sweigart, A. (2015). \textit{Automate the Boring Stuff with Python: Practical Programming for Total Beginners}. No Starch Press.
+
+\bibitem{fluentpython} Ramalho, L. (2015). \textit{Fluent Python: Clear, Concise, and Effective Programming}. O'Reilly Media.
+
+\bibitem{learningpython} Lutz, M. (2013). \textit{Learning Python}. O'Reilly Media.
+
+\bibitem{pythondatascience} VanderPlas, J. (2016). \textit{Python Data Science Handbook: Essential Tools for Working with Data}. O'Reilly Media.
+
+\bibitem{effectivepython} Slatkin, B. (2015). \textit{Effective Python: 59 Specific Ways to Write Better Python}. Addison-Wesley Professional.
+
+\bibitem{thinkpython} Downey, A. B. (2012). \textit{Think Python: How to Think Like a Computer Scientist}. Green Tea Press.
+
+\bibitem{pythondocs} Python Software Foundation. \textit{Python Documentation}. Retrieved from \url{https://docs.python.org}
+
+\bibitem{pythontutorial} Python Software Foundation. \textit{Python Tutorial}. Retrieved from \url{https://docs.python.org/3/tutorial/index.html}
+
+\bibitem{realpython} Real Python. \textit{Python Tutorials and Articles}. Retrieved from \url{https://realpython.com}
+
+\end{thebibliography}
+
+% THE DOCUMENT IS ESSENTIALLY DONE AT THIS POINT, NO NEED TO EDIT ANYTHING BELOW THIS______________________________________________________________________________________________
+% Bibliography
+\newpage
+\printbibliography
+\end{document}

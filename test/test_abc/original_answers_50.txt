@@ -1,0 +1,51 @@
+The file tith correact answers
+1.Answer: b) 4
+2.Answer: e) array
+3.Answer: c) x = 5
+4.Answer: a) 2.5
+5.Answer: a) input()
+6.Answer: c) Error
+7.Answer: c) # comment
+8.Answer: d) def
+9.Answer: b) el
+10.Answer: d) if (x > 5):
+11.Answer: c) 3
+12.Answer: a) **
+13.Answer: a) x == y
+14.Answer: d) Error
+15.Answer: a) while
+16.Answer: b) file = open("data.txt", "r")
+17.Answer: b) False
+18.Answer: a) int(x)
+19.Answer: b) [1, 2, 3, 4]
+20.Answer: c) pop()
+21.Answer: a) ["Hello", "World!"]
+22.Answer: a) datetime
+23.Answer: a) list.sort()
+24.Answer: a) Hello World
+25.Answer: d) list.copy()
+26.Answer: c) {1, 2, 3, 4, 5}
+27.Answer: b) len(string)
+28.Answer: a) [1, 2, 3, 4]
+29.Answer: a) break
+30.Answer: c) 1
+31.Answer: a) value in list
+32.Answer: a) [1, 2, 3]
+33.Answer: b) for
+34.Answer: b) file.close()
+35.Answer: b) False
+36.Answer: a) str(x)
+37.Answer: a) ["name", "age"]
+38.Answer: a) re
+39.Answer: a) key in dict
+40.Answer: b) hello, world!
+41.Answer: a) //
+42.Answer: d) 4
+43.Answer: a) random
+44.Answer: b) False
+45.Answer: a) str(x)
+46.Answer: b) [1, 3, 4]
+47.Answer: b) string.startswith(substring)
+48.Answer: a) Hello World
+49.Answer: c) discard()
+50.Answer: b) [1, 2, 3, 4]
